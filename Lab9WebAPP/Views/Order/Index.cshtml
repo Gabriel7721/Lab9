@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Lab9Lib.Product>
+@{
+    ViewBag.tittle = "Order Page";
+}
+<div>
+    <h1>
+        Order Page
+    </h1>
+    <table class="table">
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Product Photo</th>
+            <th>Product Price</th>
+            <th>Product Quantity</th>
+            <th>Sub Total</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in ViewBag.Cart)
+        {
+            <tr>
+                <td>@item.Product.ProductId</td>
+                <td>@item.Product.ProductName</td>
+                <td>
+                    <img src="@item.Product.Photo" width="110" />
+                </td>
+                <td>@item.Product.Price</td>
+                <td>@item.Quantity</td>
+                <td>($)@(item.Product.Price * @item.Quantity)</td>
+                <td>
+                    <a asp-action="Remove" asp-controller="Order" asp-route-id="@item.Product.ProductId">Remove</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5" style="text-align:right">Total</td>
+            <td>($)@ViewBag.subtotal</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <a asp-action="Index" asp-controller="Home">Shopping Continue...</a> |
+                <a asp-action="Success" asp-controller="Order">Confirm Order Please</a>
+            </td>
+        </tr>
+        <tr>
+            @* date time *@
+            <td colspan="5" style="text-align:right">Date Time</td>
+            <td>@DateTime.Now</td>
+        </tr>
+    </table>
+</div>

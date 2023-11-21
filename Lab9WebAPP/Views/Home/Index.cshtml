@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Lab9Lib.Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        List of Products
+    </h1>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table border="1">
+        <tr style="background-color:yellow">
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Product Quantity</th>
+            <th>Product Photo</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <img src="@item.Photo" width="110" />
+                </td>
+                <td>
+                    <a asp-action="Buy" asp-controller="Order" asp-route-id="@item.ProductId">Add to Cart</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
